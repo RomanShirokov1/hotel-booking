@@ -160,8 +160,8 @@ java scripts/GenerateKeys.java
 
 `verify` запускает проверки формата Google Java Format, тесты JWT, интеграционные тесты Hotel/Booking и системные тесты с четырьмя реальными JVM. Системные тесты выбирают свободные порты, завершают процессы и сохраняют логи в `system-tests/target/`. Прокси в тестах позволяет потерять ответ после реального commit Hotel и проверить компенсацию. [Модуль system-tests](system-tests/README.md)
 
-Для проверки бизнес-модулей без системного запуска: `mvnw.cmd -pl hotel-service,booking-service -am test`. Для сборки JAR без тестов: `mvnw.cmd -DskipTests package`. Отчёты: `*/target/surefire-reports`, `system-tests/target/failsafe-reports`. GitHub Actions выполняет `verify` на Java 21 и прикладывает отчёты; фактический статус появится после публикации репозитория.
+Для проверки бизнес-модулей выполните `mvnw.cmd -pl hotel-service,booking-service -am test`. Для сборки JAR выполните `mvnw.cmd -DskipTests package`. Отчёты находятся в `*/target/surefire-reports` и `system-tests/target/failsafe-reports`. GitHub Actions запускает `verify` на Java 21.
 
-Подробности: [поэтапный разбор](docs/WALKTHROUGH.md), [схема данных](docs/DATABASE.md), [архитектурные решения](docs/ADR.md), [соответствие критериям](docs/CRITERIA.md), [повторное ревью и результаты запуска](docs/REVIEW.md).
+[Схема данных](docs/DATABASE.md) · [Архитектурные решения](docs/ADR.md)
 
 На Linux/macOS выполните `java scripts/GenerateKeys.java` и `sh ./mvnw -B -ntp verify` из корня проекта. После сборки запустите четыре JAR в отдельных терминалах в порядке Eureka → Hotel → Booking → Gateway. Команда для каждого модуля имеет вид `java -jar <module>/target/<module>-1.0.0.jar --spring.profiles.active=demo`. Все команды выполняются из корня проекта.
