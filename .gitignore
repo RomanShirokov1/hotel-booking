@@ -1,0 +1,7 @@
+**/target/
+.idea/
+.vscode/
+*.log
+config/keys/
+.run/
+.env
